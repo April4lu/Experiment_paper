@@ -1,7 +1,4 @@
 git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
-
-作者：意气相许的许
-链接：https://www.jianshu.com/p/bf856b963670
-來源：简书
-简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
+git config --global alias.psm 'push origin master'
+git config --global alias.plm 'pull origin master'
