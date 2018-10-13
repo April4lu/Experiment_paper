@@ -75,9 +75,10 @@ def discriminator(inputs_d, drop_out):
 
     return o
 
+
 batch_size = 100
 learning_rate = 0.0001
-train_epoch = 3
+train_epoch = 4#由于只检查权重的不更新，所以迭代步数设置较少
 #mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 #train_set = (mnist.train.images - 0.5) / 0.5
 
@@ -90,6 +91,7 @@ with tf.variable_scope('D') as scope:
     #inputs_d = tf.placeholder(tf.float32, shape=(None, 784))
     #D_real = discriminator(inputs_d,drop_out,t_vars)
     #scope.reuse_variables()
+    
     D_fake= discriminator(G_z,drop_out)
 
 
@@ -99,8 +101,11 @@ D_loss = tf.reduce_mean(- tf.log(1 - D_fake + eps))
 G_loss = tf.reduce_mean(-tf.log(D_fake + eps))
 
 # trainable variables for each network
+
 t_vars = tf.trainable_variables()
+print(t_vars)
 D_vars = [var for var in t_vars if 'D_3_' in var.name]
+print(D_vars)
 G_vars = [var for var in t_vars if 'G_' in var.name]
 
 save_file = './cc3/train_model.ckpt1'
@@ -121,11 +126,11 @@ with tf.Session()as sess:
         print(epoch)
         G_losses = []
         D_losses = []
-        """
-        if epoch%10 == 0:
-            print("G_losses:",G_losses)
-            print("D_losses:",D_losses)
-        """
+        
+        #if epoch%10 == 0:
+            #print("G_losses:",G_losses)
+            #print("D_losses:",D_losses)
+
         for iter in range(55000 // batch_size):
         #for iter in range(train_set.shape[0] // batch_size):
             
