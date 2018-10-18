@@ -39,23 +39,23 @@ def discriminator(inputs_d, drop_out):
     w_init = tf.truncated_normal_initializer(mean=0, stddev=0.02)
     b_init = tf.constant_initializer(0.)
     # 1st hidden layer
-    w0 = tf.get_variable('D_0_w', initializer=reader.get_tensor('D_0_w'),trainable=False)
-    b0 = tf.get_variable('D_0_b', initializer=reader.get_tensor('D_0_b'),trainable=False)
+    w0 = tf.get_variable('D_0_w', initializer = reader.get_tensor('D_0_w'), trainable=False)
+    b0 = tf.get_variable('D_0_b', initializer = reader.get_tensor('D_0_b'), trainable=False)
     h0 = tf.nn.relu(tf.matmul(inputs_d, w0) + b0)
     h0 = tf.nn.dropout(h0, drop_out)
     # 2nd hidden layer
-    w1 = tf.get_variable('D_1_w', initializer=reader.get_tensor('D_1_w'),trainable=False)
-    b1 = tf.get_variable('D_1_b', initializer=reader.get_tensor('D_1_b'),trainable=False)
+    w1 = tf.get_variable('D_1_w', initializer = reader.get_tensor('D_1_w'), trainable=False)
+    b1 = tf.get_variable('D_1_b', initializer = reader.get_tensor('D_1_b'), trainable=False)
     h1 = tf.nn.relu(tf.matmul(h0, w1) + b1)
     h1 = tf.nn.dropout(h1, drop_out)
     # 3rd hidden layer
-    w2 = tf.get_variable('D_2_w', initializer=reader.get_tensor('D_2_w'),trainable=False)
-    b2 = tf.get_variable('D_2_b', initializer=reader.get_tensor('D_2_b'),trainable=False)
+    w2 = tf.get_variable('D_2_w', initializer = reader.get_tensor('D_2_w'), trainable=False)
+    b2 = tf.get_variable('D_2_b', initializer = reader.get_tensor('D_2_b'), trainable=False)
     h2 = tf.nn.relu(tf.matmul(h1, w2) + b2)
     h2 = tf.nn.dropout(h2, drop_out)
     # output layer     
-    w3 = tf.get_variable('D_3_w', [h2.get_shape()[1], 1], initializer=w_init,trainable=True)
-    b3 = tf.get_variable('D_3_b', [1], initializer=b_init,trainable=True)
+    w3 = tf.get_variable('D_3_w', [h2.get_shape()[1], 1], initializer = w_init, trainable=True)
+    b3 = tf.get_variable('D_3_b', [1], initializer = b_init, trainable=True)
     o = tf.sigmoid(tf.matmul(h2, w3) + b3)
     return o
 
@@ -87,12 +87,8 @@ G_loss = tf.reduce_mean(-tf.log(D_fake + eps))
 # trainable variables for each network
 
 t_vars = tf.trainable_variables()
-print(t_vars)
 D_vars = [var for var in t_vars if 'D_3_' in var.name]
-print(D_vars)
 G_vars = [var for var in t_vars if 'G_' in var.name]
-#a_vars = tf.all_variables()
-#print(a_vars)
 
 save_file = './cc3/train_model.ckpt1'
 saver = tf.train.Saver()
