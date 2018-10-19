@@ -1,10 +1,14 @@
-# Experiment_part2_gan
-cc3 and nn are files of parameters of weights and so on
+#=Experiment_paper
+  The experiment could verify the effect of attack mentioned by CCS'17 , which is divided into part1 and part2.
 
 
-test_for_main_gan.py is what we used
+#_Experiment_part1
+  The part1 is a simple 3-layer neural network with SGD. All information of net will be saved in the file named nn, which could print by nn_print.py
 
 
-file_cc3_print.py and file_nn_print.py could print parameters
+#_Experiment_part1_add_noise
+  In this part, some Gaussian noise was added to gardients which lead to a lower accuracy.
 
-the weights of discriminator come from the file called nn
+
+#_Experiment_part2
+  The part2 is a GAN network in which parameters of discriminator is from the file 'nn' and keep static in iteration. when you execute the test_for_GAN.py, the information of network will write in the file'cc3'. 
