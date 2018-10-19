@@ -1,4 +1,0 @@
-git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-
-git config --global alias.psm 'push origin master'
-git config --global alias.plm 'pull origin master'
